@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 from .models import Item
 
+
 class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(
         attrs={
@@ -15,14 +16,15 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={
             'placeholder': 'Tu password',
-            'class': 'form-control'
+                       'class': 'form-control'
         }
     ))
+
 
 class SignupForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2' ]
+        fields = ['username', 'email', 'password1', 'password2']
 
     username = forms.CharField(widget=forms.TextInput(
         attrs={
@@ -51,3 +53,38 @@ class SignupForm(UserCreationForm):
             'class': 'form-control'
         }
     ))
+
+
+class NewItemForm(forms.ModelForm):
+    class Meta:
+        model = Item
+        fields = ['category', 'name', 'description', 'price', 'image']
+
+        widgets = {
+            'category': forms.Select(
+                attrs={
+                    'class': 'form-select'
+                }
+            ),
+            'name': forms.TextInput(
+                attrs={
+                    'class': 'form-select'
+                }
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'form-select',
+                    'style': 'height: 100px'
+                }
+            ),
+            'price': forms.TextInput(
+                attrs={
+                    'class': 'form-select'
+                }
+            ),
+            'image': forms.FileInput(
+                attrs={
+                    'class': 'form-select'
+                }
+            )
+        }
